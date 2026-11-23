@@ -718,7 +718,8 @@ tbody tr:last-child td {
         font-size: 12px;
         font-weight: 500;
     }
-    .table-wrap td[data-label=""]::before { display: none }
+    .table-wrap td[data-label=""]::before,
+    .table-wrap td:not([data-label])::before { display: none }
 
     /* first cell = card title (e.g. customer name) */
     .table-wrap tbody tr td:first-child {

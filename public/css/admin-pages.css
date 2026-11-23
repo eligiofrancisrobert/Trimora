@@ -325,8 +325,9 @@ code {
 
 /* Tables -> Cards on small screens: Actions cell (see admin-layout.css) */
 @media (max-width:720px) {
-    .table-wrap td[data-label="Actions"] {
+    .table-wrap td:has(.btn-sm) {
         display: flex;
+        flex-wrap: nowrap;
         justify-content: stretch;
         gap: 8px;
         padding: 14px 0 12px;
@@ -335,18 +336,29 @@ code {
         border-bottom: 0;
     }
 
-    .table-wrap tbody tr td:has(+ td[data-label="Actions"]) {
+    .table-wrap tbody tr td:has(+ td .btn-sm) {
         border-bottom: 0
     }
 
-    .table-wrap td[data-label="Actions"]::before {
+    .table-wrap td:has(.btn-sm)::before {
         display: none
     }
 
-    .table-wrap td[data-label="Actions"] .btn-sm {
+    .table-wrap td:has(.btn-sm) .btn-sm {
         flex: 1;
         margin-right: 0;
-        padding: 9px 12px;
+        padding: 10px 12px;
         text-align: center
     }
+}
+
+/* Appointments table (8 columns) - labels written in CSS, no JS needed.
+   To rename a label, change the text in content: "..." */
+@media (max-width:720px) {
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(2)::before { display: block; content: "Service" }
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(3)::before { display: block; content: "Schedule" }
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(4)::before { display: block; content: "Barber" }
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(5)::before { display: block; content: "Payment" }
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(6)::before { display: block; content: "Verification" }
+    .table-wrap tr:has(> td:nth-child(8):last-child) > td:nth-child(7)::before { display: block; content: "Status" }
 }
