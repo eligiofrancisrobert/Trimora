@@ -3,8 +3,15 @@
   const T = window.Trimora;
   const content = document.getElementById('content');
 
+  const errorCard = (title, msg) => `<section class="card"><div class="empty"><h3>${title}</h3><p>${T.esc(msg)}</p></div></section>`;
+  const loadError = () => errorCard('Data not loaded', T.loadError || 'The data could not be loaded. Check that public/data/sample-data.js was deployed, then hard refresh (Ctrl+F5).');
+
   T.go = name => {
-    if (!T.data) return;
+    if (!T.data) {
+      document.querySelectorAll('.nav-item[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+      content.innerHTML = loadError();
+      return;
+    }
     const page = T.pages[name];
     if (!page) {
       content.innerHTML = `<section class="card"><div class="empty"><h3>Page not found</h3><p>Missing script: public/js/admin/pages/${name}-page.js</p></div></section>`;
@@ -41,8 +48,12 @@
 
   fetch('/api/admin')
     .then(r => { if (!r.ok) throw new Error('API responded ' + r.status); return r.json(); })
-    .catch(err => { console.warn('API unavailable, using built-in sample data.', err); return window.TrimoraSampleData.buildAdminPayload(); })
+    .catch(err => {
+      console.warn('API unavailable, using built-in sample data.', err);
+      if (!window.TrimoraSampleData) throw new Error('/api/admin failed (' + err.message + ') and /data/sample-data.js was not found.');
+      return window.TrimoraSampleData.buildAdminPayload();
+    })
     .then(d => { T.data = d; T.go('dashboard'); })
-    .catch(err => { console.error(err); content.innerHTML = `<section class="card"><div class="empty"><h3>Could not load data</h3><p>Open the site through http://localhost:3000 after running npm start. (${T.esc(err.message)})</p></div></section>`; });
+    .catch(err => { console.error(err); T.loadError = err.message; content.innerHTML = loadError(); });
   T.refreshIcons();
 })();
