@@ -1,0 +1,9 @@
+{
+  "name": "trimora",
+  "version": "1.0.0",
+  "description": "Trimora - Appointment and Customer Management System (Admin Dashboard)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "license": "ISC",
+  "dependencies": { "express": "^4.19.2" }
+}

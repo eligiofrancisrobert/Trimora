@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trimora | Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><i data-lucide="scissors"></i></span>
+      <span class="brand-text"><strong>Trimora</strong><small>Backyard Barbershop</small></span>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="dashboard" title="Dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
+      <button class="nav-item" data-view="appointments" title="Appointments"><i data-lucide="calendar-check"></i><span>Appointments</span></button>
+      <button class="nav-item" data-view="customers" title="Customers"><i data-lucide="users"></i><span>Customers</span></button>
+      <button class="nav-item" data-view="services" title="Services"><i data-lucide="brush"></i><span>Services</span></button>
+      <button class="nav-item" data-view="payments" title="Payments"><i data-lucide="wallet"></i><span>Payments</span></button>
+      <button class="nav-item" data-view="reports" title="Reports"><i data-lucide="bar-chart-3"></i><span>Reports</span></button>
+      <button class="nav-item" data-view="settings" title="Settings"><i data-lucide="settings"></i><span>Settings</span></button>
+    </nav>
+    <button class="nav-item logout" id="logout" title="Logout"><i data-lucide="log-out"></i><span>Logout</span></button>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn" id="toggle" aria-label="Toggle sidebar"><i data-lucide="menu"></i></button>
+      <div class="heading">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p>Welcome back, Admin!</p>
+      </div>
+      <div class="search">
+        <i data-lucide="search"></i>
+        <input type="search" id="search" placeholder="Search customer, service, barber..." aria-label="Search">
+      </div>
+      <span class="date" id="today"></span>
+      <button class="icon-btn" aria-label="Notifications"><i data-lucide="bell"></i><span class="dot"></span></button>
+      <div class="profile"><span class="avatar">AD</span><span class="profile-text"><strong>Admin</strong><small>Shop owner</small></span></div>
+    </header>
+
+    <main class="content" id="content"></main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
