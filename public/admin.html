@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trimora | Admin Dashboard</title>
+  <title>Trimora | Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/admin-layout.css">
+  <link rel="stylesheet" href="css/admin-pages.css">
 </head>
 <body>
   <div class="overlay" id="overlay"></div>
@@ -38,18 +39,27 @@
       </div>
       <div class="search">
         <i data-lucide="search"></i>
-        <input type="search" id="search" placeholder="Search customer, service, barber..." aria-label="Search">
+        <input type="search" id="search" placeholder="Search on this page..." aria-label="Search">
       </div>
       <span class="date" id="today"></span>
       <button class="icon-btn" aria-label="Notifications"><i data-lucide="bell"></i><span class="dot"></span></button>
       <div class="profile"><span class="avatar">AD</span><span class="profile-text"><strong>Admin</strong><small>Shop owner</small></span></div>
     </header>
-
     <main class="content" id="content"></main>
   </div>
+  <div class="toast" id="toast" role="status"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script src="js/admin/utils.js"></script>
+  <script src="js/admin/components.js"></script>
+  <script src="js/admin/pages/dashboard-page.js"></script>
+  <script src="js/admin/pages/appointments-page.js"></script>
+  <script src="js/admin/pages/customers-page.js"></script>
+  <script src="js/admin/pages/services-page.js"></script>
+  <script src="js/admin/pages/payments-page.js"></script>
+  <script src="js/admin/pages/reports-page.js"></script>
+  <script src="js/admin/pages/settings-page.js"></script>
+  <script src="js/admin/router.js"></script>
 </body>
 </html>
