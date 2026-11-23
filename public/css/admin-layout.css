@@ -675,7 +675,12 @@ tbody tr:last-child td {
         clip: rect(0 0 0 0);
     }
 
-    .table-wrap tbody { display: flex; flex-direction: column; gap: 14px }
+    /* cards laid out in a grid: 1 column on phones, 2+ on wider screens */
+    .table-wrap tbody {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+    }
 
     .table-wrap tbody tr {
         background: var(--card);
@@ -683,43 +688,46 @@ tbody tr:last-child td {
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         padding: 4px 16px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
     .table-wrap tbody tr:hover { background: var(--card) }
+    /* empty-state row takes the full width */
+    .table-wrap tbody tr:has(td[colspan]) { grid-column: 1 / -1; height: auto }
 
-    /* each info = one line: label left, value right */
+    /* each info = one row: label (left column) | value (left-aligned) */
     .table-wrap tbody tr td {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 95px minmax(0, 1fr);
         align-items: center;
-        gap: 16px;
+        gap: 12px;
         padding: 11px 0;
         border-bottom: 1px dashed var(--border);
         white-space: normal;
-        text-align: right;
-        word-break: break-word;
+        text-align: left;
+        overflow-wrap: anywhere;
     }
     .table-wrap tbody tr td:last-child { border-bottom: 0 }
 
     .table-wrap td::before {
         content: attr(data-label);
-        flex-shrink: 0;
         color: var(--muted);
         font-size: 12px;
         font-weight: 500;
-        text-align: left;
     }
     .table-wrap td[data-label=""]::before { display: none }
 
     /* first cell = card title (e.g. customer name) */
     .table-wrap tbody tr td:first-child {
-        justify-content: flex-start;
-        text-align: left;
+        display: block;
         font-weight: 600;
+        font-size: 15px;
         padding: 14px 0;
         border-bottom: 1px solid var(--border);
     }
     .table-wrap tbody tr td:first-child::before { display: none }
 
     /* empty-state row (colspan) */
-    .table-wrap td[colspan] { justify-content: center; text-align: center }
+    .table-wrap td[colspan] { display: block; text-align: center }
 }

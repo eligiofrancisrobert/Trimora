@@ -326,9 +326,12 @@ code {
 /* Tables -> Cards on small screens: Actions cell (see admin-layout.css) */
 @media (max-width:720px) {
     .table-wrap td[data-label="Actions"] {
+        display: flex;
         justify-content: stretch;
         gap: 8px;
         padding: 14px 0 12px;
+        margin-top: auto;
+        border-bottom: 0;
     }
 
     .table-wrap td[data-label="Actions"]::before {
