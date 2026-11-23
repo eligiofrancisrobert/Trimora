@@ -698,10 +698,11 @@ tbody tr:last-child td {
 
     /* each info = one row: label (left column) | value (left-aligned) */
     .table-wrap tbody tr td {
-        display: grid;
-        grid-template-columns: 95px minmax(0, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 12px;
+        justify-content: flex-start;
+        gap: 4px 12px;
         padding: 11px 0;
         border-bottom: 1px dashed var(--border);
         white-space: normal;
@@ -712,6 +713,7 @@ tbody tr:last-child td {
 
     .table-wrap td::before {
         content: attr(data-label);
+        flex: 0 0 95px;
         color: var(--muted);
         font-size: 12px;
         font-weight: 500;

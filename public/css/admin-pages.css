@@ -331,7 +331,12 @@ code {
         gap: 8px;
         padding: 14px 0 12px;
         margin-top: auto;
+        border-top: 1px solid var(--border);
         border-bottom: 0;
+    }
+
+    .table-wrap tbody tr td:has(+ td[data-label="Actions"]) {
+        border-bottom: 0
     }
 
     .table-wrap td[data-label="Actions"]::before {
