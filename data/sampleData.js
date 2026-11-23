@@ -1,5 +1,8 @@
+// Sample data shared by the Node API and the browser fallback (works as a Node module and as a plain <script>).
 // Sample data only. Replace with database queries in a later phase.
-const iso = offset => { const d = new Date(); d.setDate(d.getDate() + offset); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+(function (root) {
+const nowPH = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+const iso = offset => { const d = nowPH(); d.setDate(d.getDate() + offset); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
 const services = [
   { id: 1, name: 'Classic Haircut', category: 'Haircut', duration: 30, price: 150, bookings: 64, active: true },
@@ -72,4 +75,26 @@ const settings = {
   notifications: { reminders: true, rescheduling: true, barberUnavailable: true, noShow: true }
 };
 
-module.exports = { services, customers, appointments, payments, activities, reports, settings, iso };
+function buildAdminPayload() {
+  const today = iso(0);
+  const price = Object.fromEntries(services.map(s => [s.name, s.price]));
+  const revenue = reports.revenue.data.reduce((t, n) => t + n, 0);
+  return JSON.parse(JSON.stringify({
+    today,
+    stats: {
+      todayAppointments: appointments.filter(a => a.date === today).length,
+      todayChange: 12,
+      totalCustomers: 248,
+      newCustomers: 9,
+      pending: appointments.filter(a => a.status === 'Pending').length,
+      revenue,
+      revenueChange: 8
+    },
+    appointments: appointments.map(a => ({ ...a, price: price[a.service] || 0 })),
+    customers, services, payments, activities, reports, settings
+  }));
+}
+
+const api = { buildAdminPayload };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.TrimoraSampleData = api;
+})(typeof window !== 'undefined' ? window : globalThis);
