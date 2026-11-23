@@ -1,4 +1,4 @@
-rimora 💈
+Trimora 💈
 
 Web-Based Appointment and Customer Management System
 
