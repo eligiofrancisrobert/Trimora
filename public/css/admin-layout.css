@@ -649,3 +649,77 @@ tbody tr:last-child td {
         transition: none !important
     }
 }
+
+/* ==========================================================
+   Tables -> Cards on small screens
+   (Keep this at the END of the file so it overrides the
+   base table styles above. Needs data-label on each <td>.
+   The Actions-cell button styles live in admin-pages.css.)
+   ========================================================== */
+@media (max-width:720px) {
+    .table-wrap { overflow-x: visible }
+
+    .table-wrap table,
+    .table-wrap tbody,
+    .table-wrap tr,
+    .table-wrap td { display: block; width: 100% }
+
+    .table-wrap table { min-width: 0 }
+
+    /* header hidden visually, still available to screen readers */
+    .table-wrap thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    .table-wrap tbody { display: flex; flex-direction: column; gap: 14px }
+
+    .table-wrap tbody tr {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 4px 16px;
+    }
+    .table-wrap tbody tr:hover { background: var(--card) }
+
+    /* each info = one line: label left, value right */
+    .table-wrap tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 11px 0;
+        border-bottom: 1px dashed var(--border);
+        white-space: normal;
+        text-align: right;
+        word-break: break-word;
+    }
+    .table-wrap tbody tr td:last-child { border-bottom: 0 }
+
+    .table-wrap td::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+        text-align: left;
+    }
+    .table-wrap td[data-label=""]::before { display: none }
+
+    /* first cell = card title (e.g. customer name) */
+    .table-wrap tbody tr td:first-child {
+        justify-content: flex-start;
+        text-align: left;
+        font-weight: 600;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .table-wrap tbody tr td:first-child::before { display: none }
+
+    /* empty-state row (colspan) */
+    .table-wrap td[colspan] { justify-content: center; text-align: center }
+}

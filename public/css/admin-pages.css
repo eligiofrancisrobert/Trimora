@@ -322,3 +322,23 @@ code {
         gap: 0
     }
 }
+
+/* Tables -> Cards on small screens: Actions cell (see admin-layout.css) */
+@media (max-width:720px) {
+    .table-wrap td[data-label="Actions"] {
+        justify-content: stretch;
+        gap: 8px;
+        padding: 14px 0 12px;
+    }
+
+    .table-wrap td[data-label="Actions"]::before {
+        display: none
+    }
+
+    .table-wrap td[data-label="Actions"] .btn-sm {
+        flex: 1;
+        margin-right: 0;
+        padding: 9px 12px;
+        text-align: center
+    }
+}
